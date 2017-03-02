@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * @author Jorge
  */
 @Entity
-@Table (name = "M6UF2_DIRECCIONS")
+@Table (name = "Direccio")
 public class Direccio implements Serializable {
 
     private static final long serialVersionUID = 1L;

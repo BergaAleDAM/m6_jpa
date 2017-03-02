@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -17,12 +16,13 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     
-@NamedQuery(name=Vehicle.CONSULTA, query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
+@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
 
 @Table(name = "Asseguradores")
 
 public class Asseguradora implements Serializable{
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -33,6 +33,9 @@ public class Asseguradora implements Serializable{
     
     
     private String nif;
+
+    public Asseguradora() {
+    }
 
     public Asseguradora(Long id, String nom, String nif) {
         this.id = id;

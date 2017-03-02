@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -21,7 +22,7 @@ import javax.persistence.Temporal;
 @Entity
 @NamedQueries({
     
-@NamedQuery(name=Vehicle.CONSULTA, query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
+@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
 
 @Table(name = "Polisses", indexes = {
     @Index(columnList = "prenedor", name ="indexPrenedor")
@@ -35,18 +36,17 @@ public class Polissa implements Serializable{
     @Column(name = "numPolissa", length = 10)
     private Long numPolissa;
     
-    @Column(name = "prenedor", nullable = false)
-    @Basic(fetch= FetchType.LAZY)
-    @OneToOne
+    
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "prenedor", nullable = false)
     private Client prenedor;
     
-    @Column(name = "vehicle", nullable = false)
-    @Basic(fetch= FetchType.LAZY)
-    @OneToOne
+    
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "vehicle", nullable = false)
     private Vehicle vehicle;
     
     @Column(name = "dataInici", nullable = false)
-    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataInici;
     
@@ -62,7 +62,8 @@ public class Polissa implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
-    public static final String CONSULTA = "idPolissa";
+    public Polissa() {
+    }
 
     public Polissa(Long id, Long numPolissa, Client prenedor, Vehicle vehicle, Calendar dataInici, Calendar dataFi, TipusPolissa tipus, double prima) {
         this.id = id;

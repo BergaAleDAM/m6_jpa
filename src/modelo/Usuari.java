@@ -33,10 +33,13 @@ public class Usuari implements Serializable{
 
     @Column(name = "Contrasenya", length = 30, nullable = false)
     private String contrasenya;
+
+    public Usuari() {
+    }
     
     
     
-    public Usuari(Long id, String nombre, String Contrasenya) {
+    public Usuari(Long id, String nombre, String contrasenya) {
         this.id = id;
         this.nombre = nombre;
         this.contrasenya = contrasenya;

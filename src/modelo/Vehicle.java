@@ -19,7 +19,7 @@ import org.hibernate.annotations.IndexColumn;
 
 @NamedQueries({
 //@NamedQuery(name="PersonaNom", query="SELECT p FROM Persona p WHERE p.nombre=:nombre")})
-@NamedQuery(name=Vehicle.CONSULTA, query="SELECT v FROM Vehicles v WHERE v.vehicleId=:vehicleId")})
+@NamedQuery(name="idVehicle" , query="SELECT v FROM Vehicles v WHERE v.vehicleId=:vehicleId")})
 @Table(name = "Vehicles", indexes = {
     @Index(columnList = "matricula", name ="indexMatricula")
 })
@@ -28,8 +28,6 @@ public class Vehicle implements Serializable{
 
     
     private static final long serialVersionUID = 1L;
-
-     public static final String CONSULTA = "idVehicle";
 
     
     @Id
