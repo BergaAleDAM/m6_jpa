@@ -14,11 +14,11 @@ import javax.persistence.Table;
 
 
 @Entity
-@NamedQueries({
+//@NamedQueries({
     
-@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
+//@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
 
-@Table(name = "Asseguradores")
+//@Table(name = "Asseguradores")
 
 public class Asseguradora implements Serializable{
 

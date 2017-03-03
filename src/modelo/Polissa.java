@@ -20,9 +20,11 @@ import javax.persistence.Temporal;
 
 
 @Entity
-@NamedQueries({
+//@NamedQueries(
+ //       {
     
-@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
+//@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")}
+//)
 
 @Table(name = "Polisses", indexes = {
     @Index(columnList = "prenedor", name ="indexPrenedor")

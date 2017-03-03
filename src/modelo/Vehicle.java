@@ -16,10 +16,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.IndexColumn;
 
 @Entity
-
 @NamedQueries({
 //@NamedQuery(name="PersonaNom", query="SELECT p FROM Persona p WHERE p.nombre=:nombre")})
-@NamedQuery(name="idVehicle" , query="SELECT v FROM Vehicles v WHERE v.vehicleId=:vehicleId")})
+@NamedQuery(name=Vehicle.CONSULTA , query="SELECT v FROM Vehicles v WHERE v.id=:id")})
 @Table(name = "Vehicles", indexes = {
     @Index(columnList = "matricula", name ="indexMatricula")
 })
@@ -28,11 +27,10 @@ public class Vehicle implements Serializable{
 
     
     private static final long serialVersionUID = 1L;
-
+    public static final String CONSULTA = "idVehicle";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "vehicleId")
     private Long id;
     
     @Column(name = "Matricula", length = 7, nullable = false, unique=true)
@@ -46,16 +44,15 @@ public class Vehicle implements Serializable{
     @Column(name = "Fabricacio", length = 30)
     private int anyFabricacio;
     
-    @Column(name = "Propietari", length = 80)
+    @Column(name = "Propietari")
     @Basic(fetch= FetchType.LAZY)
- 
     private Client propietari;
 
     public Vehicle() {
     }
 
     public Vehicle(Long id, String matrcula, String marcaModel, int anyFabricacio, Client propietari) {
-        this.id = id;
+        //this.id = id;
         this.matricula = matrcula;
         this.marcaModel = marcaModel;
         this.anyFabricacio = anyFabricacio;

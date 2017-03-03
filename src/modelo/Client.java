@@ -38,7 +38,7 @@ public class Client implements Serializable {
     @Embedded
     private Adreca adreca;
 
-    public Client(String nomUser, String nif, String carrer, int numero, String poblacio) {
+    public Client(int id,String nomUser, String nif, String carrer, int numero, String poblacio) {
 
         this.nomUser = nomUser;
         this.nif = nif;
