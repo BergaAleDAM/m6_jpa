@@ -10,15 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @NamedQueries({
 //@NamedQuery(name="PersonaNom", query="SELECT p FROM Persona p WHERE p.nombre=:nombre")})
-@NamedQuery(name=Vehicle.CONSULTA , query="SELECT v FROM Vehicles v WHERE v.id=:id")})
+@NamedQuery(name=Vehicle.CONSULTA , query="SELECT v FROM Vehicle v WHERE v.id=:id")})
 @Table(name = "Vehicles", indexes = {
     @Index(columnList = "matricula", name ="indexMatricula")
 })
@@ -27,26 +29,31 @@ public class Vehicle implements Serializable{
 
     
     private static final long serialVersionUID = 1L;
+    
     public static final String CONSULTA = "idVehicle";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "Matricula", length = 7, nullable = false, unique=true)
+    @Column(name = "matricula", length = 7, nullable = false, unique=true)
     //@IndexColumn(name="indexMatricula")
     private String matricula;
 
-    @Column(name = "Marca/Model", length = 40)
+    @Column(name = "MarcaModel", length = 40)
     private String marcaModel;
     
     
     @Column(name = "Fabricacio", length = 30)
     private int anyFabricacio;
     
-    @Column(name = "Propietari")
-    @Basic(fetch= FetchType.LAZY)
+    //@Column(name = "Propietari")
+    //@Basic(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client propietari;
+    
+    @OneToOne
+    private Polissa polissa;
 
     public Vehicle() {
     }

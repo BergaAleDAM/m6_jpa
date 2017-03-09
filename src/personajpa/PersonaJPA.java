@@ -48,10 +48,17 @@ public class PersonaJPA {
             */
             //Client client1 = new Client("tekniko","12345678-Z","Calle Calle",20, "Country City Super Mega WallMart");
             
+            
             //Client client2 = new Client("teknikokoko","12345672-Z","Calle Callo",23, "CosaCOsaCOsaAOSDPSCCOSA");
+            
+            
             Client client1 = new Client (0,"cositilokiti","654789A","Street Calle",66,"Countre");
             
-            Vehicle vehicle1 = new Vehicle(0L,"Olelos","Caracole",2017,client1);
+            Vehicle vehicle1 = new Vehicle(0L,"Olelos","Caracole22",2017,client1);
+            
+            Usuari usu1 = new Usuari(0L, "Fistro", "Pecador");
+            
+            Asseguradora asse1 = new Asseguradora(0, "NombreAsseguradora", "9876543-Y");
             
             
             
@@ -59,9 +66,19 @@ public class PersonaJPA {
             
             Vehicles_Controller vc = new Vehicles_Controller();
             
+            Usuari_Controller uc = new Usuari_Controller();
+            
+            Asseguradora_Controller ac = new Asseguradora_Controller();
+
             //cc.Insertar(client1);
-            vc.Insertar(vehicle1);
-;            //cc.Insertar(client2);
+           //vc.Insertar(vehicle1);
+            
+            uc.Insertar(usu1);
+            //ac.Insertar(asse1);
+            
+            
+            
+            //cc.Insertar(client2);
 
             
             

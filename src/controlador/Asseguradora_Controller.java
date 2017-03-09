@@ -15,9 +15,9 @@ import modelo.*;
  *
  * @author Jorge
  */
-public class Vehicles_Controller {
+public class Asseguradora_Controller {
 
-    public void Insertar(Vehicle p) {
+    public void Insertar(Asseguradora a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -30,7 +30,7 @@ public class Vehicles_Controller {
         etx.begin();
 
         System.out.println("persist");
-        em.persist(p);
+        em.persist(a);
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -40,7 +40,7 @@ public class Vehicles_Controller {
         em.close();
     }
 
-    public void Modificar(Vehicle p) {
+    public void Modificar(Asseguradora a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -53,7 +53,7 @@ public class Vehicles_Controller {
         etx.begin();
 
         System.out.println("merge");
-        em.merge(p);
+        em.merge(a);
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -63,7 +63,7 @@ public class Vehicles_Controller {
         em.close();
     }
 
-    public void Eliminar(Vehicle p) {
+    public void Eliminar(Asseguradora a) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -76,7 +76,7 @@ public class Vehicles_Controller {
         etx.begin();
 
         System.out.println("remove");
-        em.remove(em.contains(p) ? p : em.merge(p));
+        em.remove(em.contains(a) ? a : em.merge(a));
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -86,34 +86,34 @@ public class Vehicles_Controller {
         em.close();
     }
 
-    public Vehicle Buscar(Long id) {
+    public Asseguradora Buscar(Long id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("busqueda");
 
-        Vehicle p = (Vehicle) em.find(Vehicle.class, id);
+        Asseguradora a = (Asseguradora) em.find(Asseguradora.class, id);
 
         System.out.println("close");
         em.close();
 
-        return p;
+        return a;
     }
-    
-    public Vehicle BuscarPerNom(String nom) {
+    /*
+    public Asseguradora BuscarPerNom(String nom) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Busqueda per nom");
-        //Query query = em.createNamedQuery("VehicleNom",Vehicle.class);
-        Query query = em.createNamedQuery(Vehicle.CONSULTA,Vehicle.class);
+        //Query query = em.createNamedQuery("AsseguradoraNom",Asseguradora.class);
+        Query query = em.createNamedQuery(Asseguradora.CONSULTA,Asseguradora.class);
         query.setParameter("nombre", nom);
-        Vehicle p = (Vehicle) query.getSingleResult();
+        Asseguradora a = (Asseguradora) query.getSingleResult();
 
         System.out.println("close");
         em.close();
 
-        return p;
+        return a;
     }
 
     public void Consulta() {
@@ -121,24 +121,24 @@ public class Vehicles_Controller {
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Consulta");
-        //List<Vehicle> lista = (List<Vehicle>) em.createQuery("FROM Vehicle").getResultList();
-        Query q = em.createQuery("FROM Vehicles");
-        List<Vehicle> lista = (List<Vehicle>) q.getResultList();
+        //List<Asseguradora> lista = (List<Asseguradora>) em.createQuery("FROM Asseguradora").getResultList();
+        Query q = em.createQuery("FROM Asseguradora");
+        List<Asseguradora> lista = (List<Asseguradora>) q.getResultList();
         imprimirLista(lista);
 
         System.out.println("close");
         em.close();
     }
 
-    public void imprimirLista(List<Vehicle> lista) {
+    public void imprimirLista(List<Asseguradora> lista) {
         System.out.println("Numero d'empleats= " + lista.size());
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(lista.get(i));
         }
     }
 
-    public void imprimirVehicle(Vehicle p) {
-        System.out.println(p);
+    public void imprimirAsseguradora(Asseguradora a) {
+        System.out.println(a);
     }
-
+*/
 }

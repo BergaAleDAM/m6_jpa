@@ -15,7 +15,7 @@ import javax.persistence.Table;
 //@NamedQueries({
 //@NamedQuery(name="PersonaNom", query="SELECT p FROM Persona p WHERE p.nombre=:nombre")})
 //@NamedQuery(name=Usuari.CONSULTA, query="SELECT u FROM Usuari u WHERE u.nomuser=:nomuser")})
-@Table(name = "M6UF2_PERSONES")
+@Table(name = "Usuari")
 
 public class Usuari implements Serializable{
     
@@ -26,7 +26,7 @@ public class Usuari implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "usuariId")
     private Long id;
-    public static final String CONSULTA = "NomUsuari";
+    public static final String CONSULTA = "NomUsu";
     
     @Column(name = "NomUser", length = 50, nullable = false)
     private String nombre;
@@ -40,6 +40,7 @@ public class Usuari implements Serializable{
     
     
     public Usuari(Long id, String nombre, String contrasenya) {
+        //
         this.id = id;
         this.nombre = nombre;
         this.contrasenya = contrasenya;

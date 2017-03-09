@@ -1,11 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.Table;
 
 @Embeddable
 @Table (name = "Adreces")
-public class Adreca {
+public class Adreca implements Serializable {
 
     private static final long serialVersionUID = 1L;
     

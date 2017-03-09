@@ -14,21 +14,23 @@ import javax.persistence.Table;
 
 
 @Entity
-//@NamedQueries({
-    
-//@NamedQuery(name="numPolissa", query="SELECT p FROM Polisses p WHERE p.numPolissa := numPolissa")})
+@NamedQueries({
+@NamedQuery(name=Asseguradora.CONSULTA, query="SELECT a FROM Asseguradora a WHERE a.nom=:nom")})
 
-//@Table(name = "Asseguradores")
-
+@Table(name = "Asseguradora")
 public class Asseguradora implements Serializable{
 
     
+    private static final long serialVersionUID = 1L;
+    
+    public static final String CONSULTA="nomAsseg"; 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    private long id;
     
-    @Column(name = "nom", length = 100, nullable = false, unique=true)
+    
+    @Column(name = "nom", length = 100)
     private String nom;
     
     
@@ -37,13 +39,13 @@ public class Asseguradora implements Serializable{
     public Asseguradora() {
     }
 
-    public Asseguradora(Long id, String nom, String nif) {
+    public Asseguradora(long id, String nom, String nif) {
         this.id = id;
         this.nom = nom;
         this.nif = nif;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

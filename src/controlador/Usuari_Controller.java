@@ -15,9 +15,9 @@ import modelo.*;
  *
  * @author Jorge
  */
-public class Vehicles_Controller {
+public class Usuari_Controller {
 
-    public void Insertar(Vehicle p) {
+    public void Insertar(Usuari u) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -30,7 +30,7 @@ public class Vehicles_Controller {
         etx.begin();
 
         System.out.println("persist");
-        em.persist(p);
+        em.persist(u);
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -40,30 +40,28 @@ public class Vehicles_Controller {
         em.close();
     }
 
-    public void Modificar(Vehicle p) {
+    public void Modificar(Usuari u) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
 
-        // El persistim a la base de dades
-        //em.getTransaction().begin();
         EntityTransaction etx = em.getTransaction();
 
         System.out.println("begin");
         etx.begin();
 
         System.out.println("merge");
-        em.merge(p);
+        em.merge(u);
 
         System.out.println("commit");
-        //em.getTransaction().commit();
+        
         etx.commit();
 
         System.out.println("close");
         em.close();
     }
 
-    public void Eliminar(Vehicle p) {
+    public void Eliminar(Usuari u) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -76,7 +74,7 @@ public class Vehicles_Controller {
         etx.begin();
 
         System.out.println("remove");
-        em.remove(em.contains(p) ? p : em.merge(p));
+        em.remove(em.contains(u) ? u : em.merge(u));
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -86,59 +84,59 @@ public class Vehicles_Controller {
         em.close();
     }
 
-    public Vehicle Buscar(Long id) {
+    public Usuari Buscar(Long id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("busqueda");
 
-        Vehicle p = (Vehicle) em.find(Vehicle.class, id);
+        Usuari u = (Usuari) em.find(Usuari.class, id);
 
         System.out.println("close");
         em.close();
 
-        return p;
+        return u;
     }
-    
-    public Vehicle BuscarPerNom(String nom) {
-        // Recupera el entity manager
+    /*
+    public Usuari BuscarPerNom(String nom) {
+        
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Busqueda per nom");
-        //Query query = em.createNamedQuery("VehicleNom",Vehicle.class);
-        Query query = em.createNamedQuery(Vehicle.CONSULTA,Vehicle.class);
+        
+        Query query = em.createNamedQuery(Usuari.CONSULTA,Usuari.class);
         query.setParameter("nombre", nom);
-        Vehicle p = (Vehicle) query.getSingleResult();
+        Usuari u = (Usuari) query.getSingleResult();
 
         System.out.println("close");
         em.close();
 
-        return p;
+        return u;
     }
 
     public void Consulta() {
-        // Recupera el entity manager
+        
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Consulta");
-        //List<Vehicle> lista = (List<Vehicle>) em.createQuery("FROM Vehicle").getResultList();
-        Query q = em.createQuery("FROM Vehicles");
-        List<Vehicle> lista = (List<Vehicle>) q.getResultList();
-        imprimirLista(lista);
+        
+        Query q = em.createQuery("FROM Usuari");
+        List<Usuari> lista = (List<Usuari>) q.getResultList();
+        //imprimirLista(lista);
 
         System.out.println("close");
         em.close();
     }
 
-    public void imprimirLista(List<Vehicle> lista) {
+    public void imprimirLista(List<Usuari> lista) {
         System.out.println("Numero d'empleats= " + lista.size());
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(lista.get(i));
         }
     }
 
-    public void imprimirVehicle(Vehicle p) {
-        System.out.println(p);
+    public void imprimirVehicle(Usuari u) {
+        System.out.println(u);
     }
-
+*/
 }

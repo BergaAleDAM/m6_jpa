@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,12 +24,12 @@ public class Client implements Serializable {
 
  
     private static final long serialVersionUID = 1L;
-    public static final String CONSULTA = "nomUser";
+    public static final String CONSULTA = "nomCli";
 
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private long id;
  
     @Column(name = "NomUser", length = 50, nullable = false)
     private String nomUser;
@@ -37,22 +39,51 @@ public class Client implements Serializable {
     
     @Embedded
     private Adreca adreca;
+    
+    
+    @OneToMany(mappedBy = "prenedor")
+    private List<Polissa> listaPoli;
 
-    public Client(int id,String nomUser, String nif, String carrer, int numero, String poblacio) {
+    
+    @OneToMany (mappedBy = "propietari")
+    private List<Vehicle> listaVechiles;
 
+    public Client(long id, String nomUser, String nif, String carrer, int numero, String poblacio) {
+        this.id = id;
         this.nomUser = nomUser;
         this.nif = nif;
         this.adreca = new Adreca(carrer, numero,poblacio);
     }
 
+    
+    
+    
     public Client() {
     }
 
-    public Long getId() {
+    public List<Polissa> getListaPoli() {
+        return listaPoli;
+    }
+
+    public void setListaPoli(List<Polissa> listaPoli) {
+        this.listaPoli = listaPoli;
+    }
+
+    public List<Vehicle> getListaVechiles() {
+        return listaVechiles;
+    }
+
+    public void setListaVechiles(List<Vehicle> listaVechiles) {
+        this.listaVechiles = listaVechiles;
+    }
+
+    
+    
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

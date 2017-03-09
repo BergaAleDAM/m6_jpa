@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -39,8 +40,8 @@ public class Polissa implements Serializable{
     private Long numPolissa;
     
     
-    @OneToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name = "prenedor", nullable = false)
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
     private Client prenedor;
     
     
@@ -56,6 +57,9 @@ public class Polissa implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataFi;
     
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Asseguradora asseguradora;
     
     private TipusPolissa tipus;
     private double prima;
@@ -67,15 +71,24 @@ public class Polissa implements Serializable{
     public Polissa() {
     }
 
-    public Polissa(Long id, Long numPolissa, Client prenedor, Vehicle vehicle, Calendar dataInici, Calendar dataFi, TipusPolissa tipus, double prima) {
+    public Polissa(Long id, Long numPolissa, Client prenedor, Vehicle vehicle, Calendar dataInici, Calendar dataFi, Asseguradora asseguradora, TipusPolissa tipus, double prima) {
         this.id = id;
         this.numPolissa = numPolissa;
         this.prenedor = prenedor;
         this.vehicle = vehicle;
         this.dataInici = dataInici;
         this.dataFi = dataFi;
+        this.asseguradora = asseguradora;
         this.tipus = tipus;
         this.prima = prima;
+    }
+
+    public Asseguradora getAsseguradora() {
+        return asseguradora;
+    }
+
+    public void setAsseguradora(Asseguradora asseguradora) {
+        this.asseguradora = asseguradora;
     }
 
     public Long getId() {
