@@ -6,6 +6,7 @@
 package personajpa;
 
 import controlador.*;
+import java.util.List;
 import modelo.*;
 
 /**
@@ -51,12 +52,13 @@ public class PersonaJPA {
             
             //Client client2 = new Client("teknikokoko","12345672-Z","Calle Callo",23, "CosaCOsaCOsaAOSDPSCCOSA");
             
+            List<Vehicle> listaVehicle = null;
             
-            Client client1 = new Client (0,"cositilokiti","654789A","Street Calle",66,"Countre");
+            Client client1 = new Client ("cositilokiti","654789A","Street Calle",686,"Countre",listaVehicle);
             
             Vehicle vehicle1 = new Vehicle(0L,"Olelos","Caracole22",2017,client1);
             
-            Usuari usu1 = new Usuari(0L, "Fistro", "Pecador");
+            Usuari usu1 = new Usuari("Fistro", "Pecador");
             
             Asseguradora asse1 = new Asseguradora(0, "NombreAsseguradora", "9876543-Y");
             
@@ -70,10 +72,12 @@ public class PersonaJPA {
             
             Asseguradora_Controller ac = new Asseguradora_Controller();
 
-            //cc.Insertar(client1);
-           //vc.Insertar(vehicle1);
+            cc.Insertar(client1);
+           vc.Insertar(vehicle1);
             
             uc.Insertar(usu1);
+            
+            
             //ac.Insertar(asse1);
             
             
@@ -110,7 +114,6 @@ public class PersonaJPA {
             //System.out.println("FI");
 
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

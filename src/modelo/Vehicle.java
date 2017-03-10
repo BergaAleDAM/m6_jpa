@@ -49,10 +49,10 @@ public class Vehicle implements Serializable{
     
     //@Column(name = "Propietari")
     //@Basic(fetch= FetchType.LAZY)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
     private Client propietari;
     
-    @OneToOne
+    @OneToOne(mappedBy = "vehicle")
     private Polissa polissa;
 
     public Vehicle() {

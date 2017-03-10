@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -30,11 +32,15 @@ public class Asseguradora implements Serializable{
     private long id;
     
     
-    @Column(name = "nom", length = 100)
+    @Column(name = "nom", length = 100, nullable = false, unique = true)
     private String nom;
     
     
     private String nif;
+    
+//    @OneToMany (mappedBy = "asseguradoraId")
+//    private List <Polissa> polissa;
+//    
 
     public Asseguradora() {
     }

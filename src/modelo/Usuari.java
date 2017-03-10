@@ -21,12 +21,12 @@ public class Usuari implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
+    public static final String CONSULTA = "NomUsu";
 
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "usuariId")
     private Long id;
-    public static final String CONSULTA = "NomUsu";
+    
     
     @Column(name = "NomUser", length = 50, nullable = false)
     private String nombre;
@@ -39,14 +39,14 @@ public class Usuari implements Serializable{
     
     
     
-    public Usuari(Long id, String nombre, String contrasenya) {
+    public Usuari(String nombre, String contrasenya) {
         //
-        this.id = id;
+        //this.id = id;
         this.nombre = nombre;
         this.contrasenya = contrasenya;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

@@ -23,13 +23,13 @@ import javax.persistence.Table;
 public class Client implements Serializable {
 
  
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
     public static final String CONSULTA = "nomCli";
 
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
  
     @Column(name = "NomUser", length = 50, nullable = false)
     private String nomUser;
@@ -41,18 +41,19 @@ public class Client implements Serializable {
     private Adreca adreca;
     
     
-    @OneToMany(mappedBy = "prenedor")
-    private List<Polissa> listaPoli;
+    //@OneToMany(mappedBy = "client")
+    //private List<Polissa> listaPoli;
 
     
     @OneToMany (mappedBy = "propietari")
     private List<Vehicle> listaVechiles;
 
-    public Client(long id, String nomUser, String nif, String carrer, int numero, String poblacio) {
-        this.id = id;
+    public Client( String nomUser, String nif, String carrer, int numero, String poblacio,List<Vehicle> listaVehicle) {
+        //this.id = id;
         this.nomUser = nomUser;
         this.nif = nif;
         this.adreca = new Adreca(carrer, numero,poblacio);
+        this.listaVechiles = listaVehicle;
     }
 
     
@@ -61,12 +62,12 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public List<Polissa> getListaPoli() {
-        return listaPoli;
-    }
+    //public List<Polissa> getListaPoli() {
+    //    return listaPoli;
+    //}
 
     public void setListaPoli(List<Polissa> listaPoli) {
-        this.listaPoli = listaPoli;
+     //   this.listaPoli = listaPoli;
     }
 
     public List<Vehicle> getListaVechiles() {
@@ -83,7 +84,7 @@ public class Client implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
