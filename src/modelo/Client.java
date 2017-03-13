@@ -2,7 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -17,57 +17,66 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-@NamedQuery(name=Client.CONSULTA, query="SELECT c FROM Client c WHERE c.id=:id")})
-@Table(name = "Client")
-
+@NamedQuery(name="cercaClientNom", query="SELECT c FROM Client c WHERE c.nom=:nom")})
+@Table (name = "Client")
 public class Client implements Serializable {
 
- 
-    private static final Long serialVersionUID = 1L;
-    public static final String CONSULTA = "nomCli";
-
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
- 
-    @Column(name = "NomUser", length = 50, nullable = false)
-    private String nomUser;
-
-    @Column(name = "Nif", length = 9, nullable = false)
+    @Column(name = "clientId" , unique = true)
+    private long id;
+    
+    @Column(name = "nif", length = 9, nullable = false, unique = true)
     private String nif;
     
-    @Embedded
-    private Adreca adreca;
-    
-    
-    //@OneToMany(mappedBy = "client")
-    //private List<Polissa> listaPoli;
-
+    @Column(name = "nomClient", length = 50)
+    private String nom;
     
     @OneToMany (mappedBy = "propietari")
     private List<Vehicle> listaVechiles;
+    
+    @OneToMany (mappedBy = "cliente")
+    private List<Polissa> listaPolizas;
+    
+    @Embedded
+    private Adreca adreca;
 
-    public Client( String nomUser, String nif, String carrer, int numero, String poblacio,List<Vehicle> listaVehicle) {
-        //this.id = id;
-        this.nomUser = nomUser;
-        this.nif = nif;
-        this.adreca = new Adreca(carrer, numero,poblacio);
-        this.listaVechiles = listaVehicle;
-    }
-
-    
-    
-    
     public Client() {
     }
 
-    //public List<Polissa> getListaPoli() {
-    //    return listaPoli;
-    //}
+    public Client(String nif, String nom,String carrer, int numero, String poblacio) {
+        
+        this.nif = nif;
+        this.nom = nom;
+        this.adreca = new Adreca(carrer, numero, poblacio);
+    }
 
-    public void setListaPoli(List<Polissa> listaPoli) {
-     //   this.listaPoli = listaPoli;
+    
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public List<Vehicle> getListaVechiles() {
@@ -78,30 +87,12 @@ public class Client implements Serializable {
         this.listaVechiles = listaVechiles;
     }
 
-    
-    
-    public long getId() {
-        return id;
+    public List<Polissa> getListaPolizas() {
+        return listaPolizas;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomUser() {
-        return nomUser;
-    }
-
-    public void setNomUser(String nomUser) {
-        this.nomUser = nomUser;
-    }
-
-    public String getNif() {
-        return nif;
-    }
-
-    public void setNif(String nif) {
-        this.nif = nif;
+    public void setListaPolizas(List<Polissa> listaPolizas) {
+        this.listaPolizas = listaPolizas;
     }
 
     public Adreca getAdreca() {
@@ -114,8 +105,8 @@ public class Client implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 17 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -131,13 +122,17 @@ public class Client implements Serializable {
             return false;
         }
         final Client other = (Client) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
-    
-    
-    
 
+    @Override
+    public String toString() {
+        return "Client{" + "id=" + id + ", nif=" + nif + ", nom=" + nom + ", adreca=" + adreca + '}';
+    }
+    
+    
+    
 }

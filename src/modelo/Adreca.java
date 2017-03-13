@@ -48,6 +48,11 @@ public class Adreca implements Serializable {
     public void setPoblacio(String poblacio) {
         this.poblacio = poblacio;
     }
+
+    @Override
+    public String toString() {
+        return "Adreca{" + "carrer=" + carrer + ", numero=" + numero + ", poblacio=" + poblacio + '}';
+    }
     
     
     

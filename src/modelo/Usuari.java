@@ -4,77 +4,56 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author Eric
+ */
 @Entity
-//@NamedQueries({
-//@NamedQuery(name="PersonaNom", query="SELECT p FROM Persona p WHERE p.nombre=:nombre")})
-//@NamedQuery(name=Usuari.CONSULTA, query="SELECT u FROM Usuari u WHERE u.nomuser=:nomuser")})
-@Table(name = "Usuari")
+@Table (name = "Usuari")
+public class Usuari implements Serializable {
 
-public class Usuari implements Serializable{
-    
     private static final long serialVersionUID = 1L;
-
-    public static final String CONSULTA = "NomUsu";
-
-     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     
+    public static final String consulta = "UsuariNom";
     
-    @Column(name = "NomUser", length = 50, nullable = false)
-    private String nombre;
-
-    @Column(name = "Contrasenya", length = 30, nullable = false)
-    private String contrasenya;
+    @Id
+    @Column(name = "Nom", length = 30, nullable = false)
+    private String nom;
+    
+    @Column(name = "Password", length = 30, nullable = false)
+    private String pass;
 
     public Usuari() {
     }
-    
-    
-    
-    public Usuari(String nombre, String contrasenya) {
-        //
-        //this.id = id;
-        this.nombre = nombre;
-        this.contrasenya = contrasenya;
+
+    public Usuari(String nom, String pass) {
+        this.nom = nom;
+        this.pass = pass;
     }
 
-    public long getId() {
-        return id;
+    public String getNom() {
+        return nom;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    
-    public String getContrasenya() {
-        return contrasenya;
+    public String getPass() {
+        return pass;
     }
 
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
-    }
-    
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.nom);
         return hash;
     }
 
@@ -90,12 +69,17 @@ public class Usuari implements Serializable{
             return false;
         }
         final Usuari other = (Usuari) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Usuari{" + "nom=" + nom + ", pass=" + pass + '}';
+    }
+    
     
     
     

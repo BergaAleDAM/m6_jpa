@@ -13,50 +13,47 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
+/**
+ *
+ * @author Eric
+ */
 @Entity
 @NamedQueries({
-@NamedQuery(name=Asseguradora.CONSULTA, query="SELECT a FROM Asseguradora a WHERE a.nom=:nom")})
+@NamedQuery(name = Asseguradora.CONSULTA, query = "Select a FROM Asseguradora a WHERE a.nom=:nom")})
+@Table (name = "Asseguradora")
+public class Asseguradora implements Serializable {
 
-@Table(name = "Asseguradora")
-public class Asseguradora implements Serializable{
-
-    
     private static final long serialVersionUID = 1L;
-    
-    public static final String CONSULTA="nomAsseg"; 
+    public static final String CONSULTA = "nomAsseg";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
-    
+
     @Column(name = "nom", length = 100, nullable = false, unique = true)
     private String nom;
     
+    @Column (name = "cif")
+    private String cif;    
     
-    private String nif;
-    
-//    @OneToMany (mappedBy = "asseguradoraId")
-//    private List <Polissa> polissa;
-//    
+    @OneToMany (mappedBy = "asseguradora")
+    private List <Polissa> polissa;
 
     public Asseguradora() {
     }
 
-    public Asseguradora(long id, String nom, String nif) {
-        this.id = id;
+    public Asseguradora( String nom, String cif) {
+        
         this.nom = nom;
-        this.nif = nif;
+        this.cif = cif;
     }
 
-    public long getId() {
+    public long getAsseguradoraId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAsseguradoraId(long asseguradoraId) {
+        this.id = asseguradoraId;
     }
 
     public String getNom() {
@@ -67,18 +64,26 @@ public class Asseguradora implements Serializable{
         this.nom = nom;
     }
 
-    public String getNif() {
-        return nif;
+    public String getCif() {
+        return cif;
     }
 
-    public void setNif(String nif) {
-        this.nif = nif;
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+
+    public List<Polissa> getPolissa() {
+        return polissa;
+    }
+
+    public void setPolissa(List<Polissa> polissa) {
+        this.polissa = polissa;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -94,15 +99,20 @@ public class Asseguradora implements Serializable{
             return false;
         }
         final Asseguradora other = (Asseguradora) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Asseguradora{" + "asseguradoraId=" + id + ", nom=" + nom + ", cif=" + cif  + '}';
+    }
+
     
     
 
+     
+    
 }

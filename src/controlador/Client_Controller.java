@@ -100,42 +100,21 @@ public class Client_Controller {
         return p;
     }
     
-    public Client BuscarPerNom(String nom) {
+       public Client BuscarPerNom(String nom) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Busqueda per nom");
-        //Query query = em.createNamedQuery("ClientNom",Client.class);
-        Query query = em.createNamedQuery(Client.CONSULTA,Client.class);
-        query.setParameter("nombre", nom);
-        Client p = (Client) query.getSingleResult();
-
+        //Query query = em.createNamedQuery("PersonaNom",Persona.class);
+        Query query = em.createNamedQuery("cercaClientNom", Client.class);
+        //El primero es ? el segundo es el parametro que le llega al metodo
+        query.setParameter("nom", nom);
+        Client c = (Client) query.getSingleResult();
         System.out.println("close");
         em.close();
-
-        return p;
+        return c;
     }
 
-    public void Consulta() {
-        // Recupera el entity manager
-        EntityManager em = new EM_Controller().getEntityManager();
-
-        System.out.println("Consulta");
-        //List<Client> lista = (List<Client>) em.createQuery("FROM Client").getResultList();
-        Query q = em.createQuery("FROM Client");
-        List<Client> lista = (List<Client>) q.getResultList();
-        imprimirLista(lista);
-
-        System.out.println("close");
-        em.close();
-    }
-
-    public void imprimirLista(List<Client> lista) {
-        System.out.println("Numero d'empleats= " + lista.size());
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i));
-        }
-    }
 
     public void imprimirClient(Client p) {
         System.out.println(p);

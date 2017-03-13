@@ -21,7 +21,9 @@ public class Main {
     static ClienteJPA u = new ClienteJPA();
     static VehicleJPA v = new VehicleJPA();
     static AsseguradoraJPA a = new AsseguradoraJPA();
-
+    static PolissaJPA p = new PolissaJPA();
+    
+    
     public static void main(String[] args) {
         try {
             
@@ -82,6 +84,10 @@ public class Main {
                     
                     case 3:
                        a.menuInicial();
+                       break;
+                       
+                    case 4:
+                       p.menuInicial();
                        break;
                        
                     case 5:

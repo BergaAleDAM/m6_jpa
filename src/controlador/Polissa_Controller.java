@@ -15,9 +15,9 @@ import modelo.*;
  *
  * @author Jorge
  */
-public class Asseguradora_Controller {
+public class Polissa_Controller {
 
-    public void Insertar(Asseguradora a) {
+    public void Insertar(Polissa p) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -30,7 +30,7 @@ public class Asseguradora_Controller {
         etx.begin();
 
         System.out.println("persist");
-        em.persist(a);
+        em.persist(p);
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -39,31 +39,29 @@ public class Asseguradora_Controller {
         System.out.println("close");
         em.close();
     }
-    
-    public void Modificar(Asseguradora a) {
+
+    public void Modificar(Polissa p) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
 
-        // El persistim a la base de dades
-        //em.getTransaction().begin();
         EntityTransaction etx = em.getTransaction();
 
         System.out.println("begin");
         etx.begin();
 
         System.out.println("merge");
-        em.merge(a);
+        em.merge(p);
 
         System.out.println("commit");
-        //em.getTransaction().commit();
+        
         etx.commit();
 
         System.out.println("close");
         em.close();
     }
 
-    public void Eliminar(Asseguradora a) {
+    public void Eliminar(Polissa p) {
         // Recupera el entity manager
         EM_Controller oem = new EM_Controller();
         EntityManager em = oem.getEntityManager();
@@ -76,7 +74,7 @@ public class Asseguradora_Controller {
         etx.begin();
 
         System.out.println("remove");
-        em.remove(em.contains(a) ? a : em.merge(a));
+        em.remove(em.contains(p) ? p : em.merge(p));
 
         System.out.println("commit");
         //em.getTransaction().commit();
@@ -86,35 +84,72 @@ public class Asseguradora_Controller {
         em.close();
     }
 
-    public Asseguradora Buscar(Long id) {
+    public Polissa Buscar(Long id) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("busqueda");
 
-        Asseguradora a = (Asseguradora) em.find(Asseguradora.class, id);
+        Polissa p = (Polissa) em.find(Polissa.class, id);
 
         System.out.println("close");
         em.close();
 
-        return a;
+        return p;
     }
     
-    public Asseguradora BuscarPerNom(String nom) {
-        // Recupera el entity manager
+    public Polissa BuscarPerClient(String nom) {
+        
         EntityManager em = new EM_Controller().getEntityManager();
 
         System.out.println("Busqueda per nom");
-        //Query query = em.createNamedQuery("AsseguradoraNom",Asseguradora.class);
-        Query query = em.createNamedQuery(Asseguradora.CONSULTA,Asseguradora.class);
-        query.setParameter("nom", nom);
-        Asseguradora a = (Asseguradora) query.getSingleResult();
+        
+        Query query = em.createNamedQuery(Polissa.CONSULTA2,Usuari.class);
+        query.setParameter("nombre", nom);
+        Polissa p = (Polissa) query.getSingleResult();
 
         System.out.println("close");
         em.close();
 
-        return a;
+        return p;
+    }
+    
+        public Polissa BuscarPerVehicle(String nom) {
+        
+        EntityManager em = new EM_Controller().getEntityManager();
+
+        System.out.println("Busqueda per nom");
+        
+        Query query = em.createNamedQuery(Polissa.CONSULTA1,Usuari.class);
+        query.setParameter("nombre", nom);
+        Polissa p = (Polissa) query.getSingleResult();
+
+        System.out.println("close");
+        em.close();
+
+        return p;
     }
 
+    public void Consulta() {
+        
+        EntityManager em = new EM_Controller().getEntityManager();
 
+        System.out.println("Consulta");
+        
+        Query q = em.createQuery("SELECT * FROM Polissa");
+        List<Polissa> lista = (List<Polissa>) q.getResultList();
+        imprimirLista(lista);
+
+        System.out.println("close");
+        em.close();
+    }
+
+    private void imprimirLista(List<Polissa> lista) {
+     
+        for (Polissa polissa : lista) {
+            System.out.println(polissa.toString());
+        }
 }
+
+    }
+

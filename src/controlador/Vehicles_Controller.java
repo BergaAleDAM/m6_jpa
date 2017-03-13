@@ -100,14 +100,14 @@ public class Vehicles_Controller {
         return p;
     }
     
-    public Vehicle BuscarPerNom(String nom) {
+    public Vehicle BuscarPerMatricula(String matricula) {
         // Recupera el entity manager
         EntityManager em = new EM_Controller().getEntityManager();
 
-        System.out.println("Busqueda per nom");
+        System.out.println("Busqueda per matricula");
         //Query query = em.createNamedQuery("VehicleNom",Vehicle.class);
         Query query = em.createNamedQuery(Vehicle.CONSULTA,Vehicle.class);
-        query.setParameter("nombre", nom);
+        query.setParameter("matricula", matricula);
         Vehicle p = (Vehicle) query.getSingleResult();
 
         System.out.println("close");
@@ -116,19 +116,7 @@ public class Vehicles_Controller {
         return p;
     }
 
-    public void Consulta() {
-        // Recupera el entity manager
-        EntityManager em = new EM_Controller().getEntityManager();
-
-        System.out.println("Consulta");
-        //List<Vehicle> lista = (List<Vehicle>) em.createQuery("FROM Vehicle").getResultList();
-        Query q = em.createQuery("FROM Vehicles");
-        List<Vehicle> lista = (List<Vehicle>) q.getResultList();
-        imprimirLista(lista);
-
-        System.out.println("close");
-        em.close();
-    }
+   
 
     public void imprimirLista(List<Vehicle> lista) {
         System.out.println("Numero d'empleats= " + lista.size());
